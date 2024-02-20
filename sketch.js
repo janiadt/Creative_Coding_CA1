@@ -26,21 +26,21 @@ function setup(){
 
   // Making our object literal to pass to the barchart class
   let barChart01 = {
-    chartType: "stacked",
+    chartType: "clustered",
     data: cleanData,
     // we need to make the y value and array for a stacked bar chart.
     yDataValue: ["Male", "Female"],
     xDataValue: "Age Group",
     xPos: 80,
     yPos: 400,
-    chartWidth: 600,
+    chartWidth: 300,
     chartHeight: 300,
     labelTextSize: 20,
     axisLineColor: "#282b29",
     labelColor: "#332f2f",
-    barWidth: 30,
-    numTicks: 4,
-    axisLineWeight: 1,
+    barWidth: 15,
+    numTicks: 10,
+    axisLineWeight: 2,
     barColor: "#bf394b",
     labelPadding: 10,
     labelRotation: 45,
@@ -49,27 +49,31 @@ function setup(){
 }
 
 let barChart02 = {
+  chartType: "stacked",
   data: cleanData,
-  yDataValue: "Total",
-  xDataValue: "Year",
-  xPos: 40,
-  yPos: 400,
-  chartWidth: 1200,
+  // we need to make the y value and array for a stacked bar chart.
+  yDataValue: ["Male", "Female"],
+  xDataValue: "Age Group",
+  xPos: 200,
+  yPos: 0,
+  chartWidth: 300,
   chartHeight: 300,
-  labelTextSize: 30,
+  labelTextSize: 20,
   axisLineColor: "#282b29",
-  labelColor: "#db1f83",
-  barWidth: 10,
-  numTicks: 4,
-  axisLineWeight: 1,
+  labelColor: "#332f2f",
+  barWidth: 30,
+  numTicks: 10,
+  axisLineWeight: 2,
   barColor: "#bf394b",
   labelPadding: 10,
   labelRotation: 45,
-  barColor: "#db701f"
+  barColor: ["#db701f", "#7b42f5"],
+  chartStrokeWidth:0.8
 }
 
 // Making our barchart class from the object literal
 barCharts.push(new BarChart(barChart01));
+barCharts.push(new BarChart(barChart02));
 
 }
 

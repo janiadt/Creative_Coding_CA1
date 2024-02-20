@@ -28,10 +28,9 @@ class BarChart {
         strokeWeight(this.axisLineWeight);
       
         let gap = (this.chartWidth - (this.data.length * this.barWidth)) / (this.data.length + 1);
-        // Making an array so we can access the y data value
+        
         let maxValue = max(this.data.map(x => x[this.yDataValue[0]]));
         let maxValues = [];
-        // console.log(this.data[0][this.yDataValue[0]]);
 
         for (let i = 0; i < this.yDataValue.length; i++){
             maxValues.push(max(this.data.map((row) => +row[this.yDataValue[i]]))); 
@@ -58,7 +57,7 @@ class BarChart {
             strokeWeight(this.chartStrokeWidth);
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
-            text((round(maxValue / 4)) * i, -70, 0);
+            text((round(maxValue / this.numTicks)) * i, -70, 0);
             pop();
             line(0,0,-10,0);
             translate(0, -this.chartHeight / this.numTicks);
@@ -75,27 +74,24 @@ class BarChart {
         // endShape()
         // pop();
 
-
-        translate(gap, 0);
+        if (this.chartType ==="stacked"){
+            translate(-this.barWidth, 0)
+        } 
+        else {
+            translate(-this.barWidth * this.yDataValue.length, 0)
+        }
+        
         for(let i = 0; i < this.data.length; i++){
             
-            // push();
-            // fill(this.barColor[0]);
-            // rect(0,0,this.barWidth, -this.data[i][this.yDataValue[0]] * scalar);
-            // pop();
-            // push();
- 
-            // fill(this.barColor[1]);
-            // translate(0, -this.data[i][this.yDataValue[1]] * scalar);
-            // rect(0,0,this.barWidth, -this.data[i][this.yDataValue[1]] * scalar);
-            
-            // pop();
-            
-            
+            translate(gap + this.barWidth, 0)
+
             push();
+            
             rotate(45);
             noStroke();
+            
             textSize(this.fontSize);
+            
             textAlign(LEFT, CENTER);
             stroke(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
@@ -103,26 +99,32 @@ class BarChart {
             translate(10, this.barWidth / 4);
             text(this.data[i][this.xDataValue], this.labelPadding, 0);
             pop();
-            translate(gap + this.barWidth, 0)
-            pop();
             
-                
+            pop();
+            push();
             //Nested loop for each y data value
             for(let j = 0; j < this.yDataValue.length; j++){
-                
+
                 let barHeight = this.data[i][this.yDataValue[j]] * scalar;
                 
-                console.log(barHeight);
-
-                
-                push();
                 fill(this.barColor[j]);
-                rect(0, 0, this.barWidth, -barHeight);
-                translate(0,-barHeight);
-                pop();
-                
+                // Drawing a rectangle with the barheight and width, and then translating to the bar height and drawing another one.
+                // If the chart type is stacked, put the bar on the other bar
+                if (this.chartType === "stacked"){
+                    rect(0, 0, this.barWidth, -barHeight);
+                    translate(0,-barHeight);
+                    
+                }
+                // If the chart type is clustered, put the bar next to the other bar
+                else {
+                    rect(0, 0, this.barWidth, -barHeight);
+                    translate(this.barWidth, 0);
+                    
+                }
                 
             }
+            pop();
+                
         } 
          
     }
