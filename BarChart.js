@@ -28,7 +28,17 @@ class BarChart {
         strokeWeight(this.axisLineWeight);
       
         let gap = (this.chartWidth - (this.data.length * this.barWidth)) / (this.data.length + 1);
-        let maxValue = max(this.data.map(x => x[this.yDataValue]));
+        // Making an array so we can access the y data value
+        let maxValue = max(this.data.map(x => x[this.yDataValue[0]]));
+        let maxValues = [];
+        // console.log(this.data[0][this.yDataValue[0]]);
+
+        for (let i = 0; i < this.yDataValue.length; i++){
+            maxValues.push(max(this.data.map((row) => +row[this.yDataValue[i]]))); 
+        }
+
+        maxValue = maxValues[0] + maxValues[1];
+        
         let scalar = this.chartHeight / maxValue;
 
         translate(this.xPos, this.yPos);
@@ -64,12 +74,24 @@ class BarChart {
         // }
         // endShape()
         // pop();
+
+
         translate(gap, 0);
         for(let i = 0; i < this.data.length; i++){
-            push();
-            fill(this.barColor);
-            rect(0,0,this.barWidth, -this.data[i][this.yDataValue] * scalar);
-            pop();
+            
+            // push();
+            // fill(this.barColor[0]);
+            // rect(0,0,this.barWidth, -this.data[i][this.yDataValue[0]] * scalar);
+            // pop();
+            // push();
+ 
+            // fill(this.barColor[1]);
+            // translate(0, -this.data[i][this.yDataValue[1]] * scalar);
+            // rect(0,0,this.barWidth, -this.data[i][this.yDataValue[1]] * scalar);
+            
+            // pop();
+            
+            
             push();
             rotate(45);
             noStroke();
@@ -78,11 +100,30 @@ class BarChart {
             stroke(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
             textSize(this.labelTextSize);
-            translate(10, this.barWidth / 5);
+            translate(10, this.barWidth / 4);
             text(this.data[i][this.xDataValue], this.labelPadding, 0);
             pop();
             translate(gap + this.barWidth, 0)
             pop();
-        }
+            
+                
+            //Nested loop for each y data value
+            for(let j = 0; j < this.yDataValue.length; j++){
+                
+                let barHeight = this.data[i][this.yDataValue[j]] * scalar;
+                
+                console.log(barHeight);
+
+                
+                push();
+                fill(this.barColor[j]);
+                rect(0, 0, this.barWidth, -barHeight);
+                translate(0,-barHeight);
+                pop();
+                
+                
+            }
+        } 
+         
     }
 }

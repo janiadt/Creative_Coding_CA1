@@ -28,7 +28,8 @@ function setup(){
   let barChart01 = {
     chartType: "stacked",
     data: cleanData,
-    yDataValue: "Male",
+    // we need to make the y value and array for a stacked bar chart.
+    yDataValue: ["Male", "Female"],
     xDataValue: "Age Group",
     xPos: 80,
     yPos: 400,
@@ -43,7 +44,7 @@ function setup(){
     barColor: "#bf394b",
     labelPadding: 10,
     labelRotation: 45,
-    barColor: "#db701f",
+    barColor: ["#db701f", "#7b42f5"],
     chartStrokeWidth:0.8
 }
 
