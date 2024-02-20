@@ -29,17 +29,30 @@ class BarChart {
       
         let gap = (this.chartWidth - (this.data.length * this.barWidth)) / (this.data.length + 1);
         
-        let maxValue = max(this.data.map(x => x[this.yDataValue[0]]));
+        let maxValue;
         let maxValues = [];
 
         for (let i = 0; i < this.yDataValue.length; i++){
             maxValues.push(max(this.data.map((row) => +row[this.yDataValue[i]]))); 
         }
 
-        maxValue = maxValues[0] + maxValues[1];
+        if (this.chartType ==="stacked"){
+            // The for loop adds all y value components for the purposes of a stacked bar chart
+            let sum = 0;
+            for(let i = 0; i < this.yDataValue.length; i++) {
+                sum += maxValues[i];
+            }
+            maxValue = sum;
+        } 
+        else {
+            maxValue = max(maxValues);
+        }
         
+        
+        // Value to be used to scale the bars
         let scalar = this.chartHeight / maxValue;
 
+        // Rendering the chart lines
         translate(this.xPos, this.yPos);
         stroke(this.axisLineColor);
       
