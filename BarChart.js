@@ -4,6 +4,8 @@ class BarChart {
         this.chartType = obj.chartType;
         this.data = obj.data;
         this.yDataValue = obj.yDataValue;
+        this.yDataDescription = obj.yDataDescription
+        this.yDataDescriptionSize = obj.yDataDescriptionSize
         this.xDataValue = obj.xDataValue;
         this.xPos = obj.xPos;
         this.yPos = obj.yPos;
@@ -59,14 +61,14 @@ class BarChart {
         line(0, 0, this.chartWidth, 0);
         line(0,0,0,-this.chartHeight);
       
-        // all labels and ticks
+        // all labels and ticks for Y value
         push();
         for(let i = 0; i < this.numTicks + 1; i++){
             push();
             noStroke();
             textSize(this.fontSize);
             textAlign(LEFT, CENTER);
-            stroke(this.labelColor);
+            fill(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
@@ -77,6 +79,19 @@ class BarChart {
             
         }
         pop();
+
+        // Y value label
+        push();
+        rotate(-90);
+        noStroke();
+        textSize(this.fontSize);
+        textAlign(CENTER, CENTER);
+        fill(this.labelColor);
+        strokeWeight(this.chartStrokeWidth);
+        textSize(this.yDataDescriptionSize);
+        text(this.data[0][this.yDataDescription], this.chartHeight/2, -this.chartWidth / 3);
+        pop();
+        
 
         // Line graph code  
         // push();
@@ -106,7 +121,7 @@ class BarChart {
             textSize(this.fontSize);
             
             textAlign(LEFT, CENTER);
-            stroke(this.labelColor);
+            fill(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
             textSize(this.labelTextSize);
             translate(10, this.barWidth / 4);

@@ -30,8 +30,10 @@ function setup(){
     data: cleanData,
     // we need to make the y value and array for a stacked bar chart.
     yDataValue: ["Male", "Female"],
+    yDataDescription: "Statistic",
+    yDataDescriptionSize: 20,
     xDataValue: "Age Group",
-    xPos: 80,
+    xPos: 130,
     yPos: 400,
     chartWidth: 300,
     chartHeight: 300,
@@ -53,8 +55,10 @@ let barChart02 = {
   data: cleanData,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
+  yDataDescription: "Statistic",
+  yDataDescriptionSize: 20,
   xDataValue: "Age Group",
-  xPos: 200,
+  xPos: 300,
   yPos: 0,
   chartWidth: 300,
   chartHeight: 300,
