@@ -4,6 +4,7 @@ class BarChart {
         this.chartTitle = obj.chartTitle;
         this.chartType = obj.chartType;
         this.data = obj.data;
+        this.fullLength = obj.fullLength;
         this.yDataValue = obj.yDataValue;
         this.yDataDescription = obj.yDataDescription
         this.yDataDescriptionSize = obj.yDataDescriptionSize
@@ -26,9 +27,20 @@ class BarChart {
 
     }
 
+  
+    
+
+
     render(){
         noFill();
         strokeWeight(this.axisLineWeight);
+
+        // Warning Errors
+        if (this.chartType === "clustered" && this.fullLength === true){
+            console.log("A 100% bar chart can not be made with a clustered or single type bar chart: " + this.chartTitle);
+            
+        }
+        
       
         let gap = (this.chartWidth - (this.data.length * this.barWidth)) / (this.data.length + 1);
         
@@ -50,7 +62,6 @@ class BarChart {
         else {
             maxValue = max(maxValues);
         }
-        
         
         // Value to be used to scale the bars
         let scalar = this.chartHeight / maxValue;
@@ -128,12 +139,9 @@ class BarChart {
             translate(gap + this.barWidth, 0)
 
             push();
-            
             rotate(45);
-            noStroke();
-            
-            textSize(this.fontSize);
-            
+            noStroke();    
+            textSize(this.fontSize);     
             textAlign(LEFT, CENTER);
             fill(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
@@ -147,7 +155,30 @@ class BarChart {
             //Nested loop for each y data value
             for(let j = 0; j < this.yDataValue.length; j++){
 
-                let barHeight = this.data[i][this.yDataValue[j]] * scalar;
+                // Calculating the max value for each bar for the purposes of the 100% bar chart
+                let barMaxValues = [];
+                let barMaxValue = 0;
+                for(let m = 0; m < this.yDataValue.length; m++){
+                    barMaxValues.push(+this.data[i][this.yDataValue[m]]);
+                }
+
+                let sum = 0;
+                for(let m = 0; m < this.yDataValue.length; m++){
+                    
+                    sum += barMaxValues[m];
+                }
+
+                barMaxValue = sum;
+
+                // If it's a full 100% length bar chart, do the adjusted barHeight calculation. If not, just do the normal one
+                let barHeight = 0;
+                if (this.fullLength === true){
+                    barHeight = (this.data[i][this.yDataValue[j]] / barMaxValue) * this.chartHeight;  
+                } else {
+                    barHeight = this.data[i][this.yDataValue[j]] * scalar;
+                }
+
+                // End calculation
                 
                 fill(this.barColor[j]);
                 // Drawing a rectangle with the barheight and width, and then translating to the bar height and drawing another one.

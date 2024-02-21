@@ -4,6 +4,7 @@ class HorizontalBarChart {
         this.chartTitle = obj.chartTitle;
         this.chartType = obj.chartType;
         this.data = obj.data;
+        this.fullLength = obj.fullLength;
         this.yDataValue = obj.yDataValue;
         this.yDataDescription = obj.yDataDescription
         this.yDataDescriptionSize = obj.yDataDescriptionSize
@@ -30,6 +31,15 @@ class HorizontalBarChart {
     render(){
         noFill();
         strokeWeight(this.axisLineWeight);
+
+        
+        // Warning Errors
+        if (this.chartType === "clustered" && this.fullLength === true){
+            console.log("A 100% bar chart can not be made with a clustered or single type bar chart: " + this.chartTitle);
+            
+        }
+        
+      
       
         let gap = (this.chartHeight - (this.data.length * this.barWidth)) / (this.data.length + 1);
         
@@ -98,7 +108,6 @@ class HorizontalBarChart {
 
         // Y value label
         push();
-        
         noStroke();
         textSize(this.fontSize);
         textAlign(CENTER, CENTER);
@@ -129,15 +138,12 @@ class HorizontalBarChart {
         for(let i = 0; i < this.data.length; i++){
             
             translate(0, gap + this.barWidth)
+
             // X data values and labels
-            push();
-            
-            
+            push();  
             noStroke();
-            
             textSize(this.fontSize);
             rotate(0);
-            
             textAlign(CENTER, CENTER);
             fill(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
@@ -149,14 +155,40 @@ class HorizontalBarChart {
                 translate(-75,this.barWidth/2); //get variables for this
             }
             text(this.data[i][this.xDataValue], this.labelPadding, 0);
+            pop();         
             pop();
-            
-            pop();
+
+            // Drawing the bars
             push();
             //Nested loop for each y data value
             for(let j = 0; j < this.yDataValue.length; j++){
 
-                let barHeight = this.data[i][this.yDataValue[j]] * scalar;
+                
+                // Calculating the max value for each bar for the purposes of the 100% bar chart
+                let barMaxValues = [];
+                let barMaxValue = 0;
+                for(let m = 0; m < this.yDataValue.length; m++){
+                    barMaxValues.push(+this.data[i][this.yDataValue[m]]);
+                }
+
+                let sum = 0;
+                for(let m = 0; m < this.yDataValue.length; m++){
+                    
+                    sum += barMaxValues[m];
+                }
+
+                barMaxValue = sum;
+
+                // If it's a full 100% length bar chart, do the adjusted barHeight calculation. If not, just do the normal one
+                let barHeight = 0;
+                if (this.fullLength === true){
+                    barHeight = (this.data[i][this.yDataValue[j]] / barMaxValue) * this.chartHeight;  
+                } else {
+                    barHeight = this.data[i][this.yDataValue[j]] * scalar;
+                }
+
+                // End calculation
+               
                 
                 fill(this.barColor[j]);
                 // Drawing a rectangle with the barheight and width, and then translating to the bar height and drawing another one.
@@ -170,9 +202,8 @@ class HorizontalBarChart {
                 else {
                     rect(0, 0, barHeight, this.barWidth);
                     translate(0,this.barWidth);
-                    
-                }
                 
+                }
             }
             pop();
                 

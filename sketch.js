@@ -26,9 +26,10 @@ function setup(){
 
   // Making our object literal to pass to the barchart class
   let barChart01 = {
-    chartTitle: "Median Annual Earning in Ireland",
+    chartTitle: "Median Annual Earning in Ireland Clustered",
     chartType: "clustered",
     data: cleanData,
+    fullLength: false,
     // we need to make the y value and array for a stacked bar chart.
     yDataValue: ["Male", "Female"],
     yDataDescription: "Statistic",
@@ -36,7 +37,7 @@ function setup(){
     xDataValue: "Age Group",
     xPos: 130,
     yPos: 400,
-    chartWidth: 300,
+    chartWidth: 400,
     chartHeight: 300,
     labelTextSize: 15,
     axisLineColor: "#282b29",
@@ -52,9 +53,10 @@ function setup(){
 }
 
 let barChart02 = {
-  chartTitle: "Median Annual Earning in Ireland",
+  chartTitle: "Median Annual Earning in Ireland Stacked",
   chartType: "stacked",
   data: cleanData,
+  fullLength: true,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
@@ -81,6 +83,7 @@ let barChart03 = {
   chartTitle: "Median Annual Earning in Ireland",
   chartType: "stacked",
   data: cleanData,
+  fullLength: true,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
@@ -107,6 +110,7 @@ let barChart04 = {
   chartTitle: "Median Annual Earning in Ireland",
   chartType: "clustered",
   data: cleanData,
+  fullLength: false,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
@@ -135,8 +139,9 @@ barCharts.push(new BarChart(barChart02));
 barCharts.push(new HorizontalBarChart(barChart03));
 barCharts.push(new HorizontalBarChart(barChart04));
 
-}
 
+
+}
 // calling the class' render function for each barchart in our barchart array
 function draw(){
   barCharts.forEach(bar => bar.render());
