@@ -26,6 +26,7 @@ function setup(){
 
   // Making our object literal to pass to the barchart class
   let barChart01 = {
+    chartTitle: "Median Annual Earning in Ireland",
     chartType: "clustered",
     data: cleanData,
     // we need to make the y value and array for a stacked bar chart.
@@ -37,12 +38,12 @@ function setup(){
     yPos: 400,
     chartWidth: 300,
     chartHeight: 300,
-    labelTextSize: 20,
+    labelTextSize: 15,
     axisLineColor: "#282b29",
     labelColor: "#332f2f",
     barWidth: 15,
     numTicks: 10,
-    axisLineWeight: 2,
+    axisLineWeight: 1,
     barColor: "#bf394b",
     labelPadding: 10,
     labelRotation: 45,
@@ -51,6 +52,7 @@ function setup(){
 }
 
 let barChart02 = {
+  chartTitle: "Median Annual Earning in Ireland",
   chartType: "stacked",
   data: cleanData,
   // we need to make the y value and array for a stacked bar chart.
@@ -62,12 +64,64 @@ let barChart02 = {
   yPos: 0,
   chartWidth: 300,
   chartHeight: 300,
-  labelTextSize: 20,
+  labelTextSize: 15,
   axisLineColor: "#282b29",
   labelColor: "#332f2f",
   barWidth: 30,
   numTicks: 10,
-  axisLineWeight: 2,
+  axisLineWeight: 1,
+  barColor: "#bf394b",
+  labelPadding: 10,
+  labelRotation: 45,
+  barColor: ["#db701f", "#7b42f5"],
+  chartStrokeWidth:0.8
+}
+
+let barChart03 = {
+  chartTitle: "Median Annual Earning in Ireland",
+  chartType: "stacked",
+  data: cleanData,
+  // we need to make the y value and array for a stacked bar chart.
+  yDataValue: ["Male", "Female"],
+  yDataDescription: "Statistic",
+  yDataDescriptionSize: 20,
+  xDataValue: "Age Group",
+  xPos: -800,
+  yPos: 480,
+  chartWidth: 300,
+  chartHeight: 300,
+  labelTextSize: 15,
+  axisLineColor: "#282b29",
+  labelColor: "#332f2f",
+  barWidth: 30,
+  numTicks: 10,
+  axisLineWeight: 1,
+  barColor: "#bf394b",
+  labelPadding: 10,
+  labelRotation: 45,
+  barColor: ["#db701f", "#7b42f5"],
+  chartStrokeWidth:0.8
+}
+
+let barChart04 = {
+  chartTitle: "Median Annual Earning in Ireland",
+  chartType: "clustered",
+  data: cleanData,
+  // we need to make the y value and array for a stacked bar chart.
+  yDataValue: ["Male", "Female"],
+  yDataDescription: "Statistic",
+  yDataDescriptionSize: 20,
+  xDataValue: "Age Group",
+  xPos: 550,
+  yPos: 45,
+  chartWidth: 500,
+  chartHeight: 300,
+  labelTextSize: 15,
+  axisLineColor: "#282b29",
+  labelColor: "#332f2f",
+  barWidth: 15,
+  numTicks: 10,
+  axisLineWeight: 1,
   barColor: "#bf394b",
   labelPadding: 10,
   labelRotation: 45,
@@ -78,6 +132,8 @@ let barChart02 = {
 // Making our barchart class from the object literal
 barCharts.push(new BarChart(barChart01));
 barCharts.push(new BarChart(barChart02));
+barCharts.push(new HorizontalBarChart(barChart03));
+barCharts.push(new HorizontalBarChart(barChart04));
 
 }
 
