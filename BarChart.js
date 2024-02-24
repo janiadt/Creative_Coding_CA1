@@ -22,14 +22,11 @@ class BarChart {
         this.barColor - obj.barColor;
         this.labelPadding = obj.labelPadding;
         this.labelRotation = obj.labelRotation;
+        this.titleSize = obj.titleSize;
         this.barColor = obj.barColor;
         this.chartStrokeWidth = obj.chartStrokeWidth;
 
     }
-
-  
-    
-
 
     render(){
         noFill();
@@ -67,6 +64,7 @@ class BarChart {
         let scalar = this.chartHeight / maxValue;
 
         // Rendering the chart lines
+        
         translate(this.xPos, this.yPos);
         stroke(this.axisLineColor);
       
@@ -80,15 +78,16 @@ class BarChart {
         textAlign(CENTER, CENTER);
         fill(this.labelColor);
         strokeWeight(this.chartStrokeWidth);
-        textSize(25);
+        textSize(this.titleSize);
         text(this.chartTitle, this.chartHeight/2, -this.chartHeight * 1.15);
         pop();
     
-      
+        
         // all labels and ticks for Y value
         push();
         for(let i = 0; i < this.numTicks + 1; i++){
             push();
+            translate(-70,0);
             noStroke();
             textSize(this.fontSize);
             textAlign(LEFT, CENTER);
@@ -97,7 +96,7 @@ class BarChart {
             textStyle(ITALIC); //Make this a variable
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
-            text((round(maxValue / this.numTicks)) * i, -70, 0);
+            text((round(maxValue / this.numTicks)) * i, 0, 0);
             pop();
             line(0,0,-10,0);
             translate(0, -this.chartHeight / this.numTicks);
@@ -116,24 +115,45 @@ class BarChart {
         textSize(this.yDataDescriptionSize);
         text(this.data[0][this.yDataDescription], this.chartHeight/2, -this.chartWidth / 3);
         pop();
+
+        // Rendering the legend by iterating through our y values
+        push();
+        if (this.fullLength === true){
+            translate(this.chartWidth + 40,-this.chartHeight/1.2);  
+        } else {
+            translate(this.chartWidth,-this.chartHeight/1.2);
+        }
+
         
+        for(let i = 0; i < this.yDataValue.length; i++){
+            push();
+            noStroke();
+            textSize(this.fontSize);
+            textAlign(LEFT, CENTER);
+            fill(this.labelColor);
+            strokeWeight(this.chartStrokeWidth);
+            textSize(this.labelTextSize);
+            text(this.yDataValue[i], 0, 0);
+            pop();
+            push();
+            fill(this.barColor[i]);
+            translate(-15,-7);
+            rect(0,0,10,10);
+            pop();
+            translate(0,20);
+        }
+        pop();
+        
+      
 
-        // Line graph code  
-        // push();
-        // beginShape()
-        // for(let i = 0; i < this.data.length; i++){  
-        //     vertex((this.barWidth+gap)*i, -this.data[i][this.yDataValue] * scalar);
-        // }
-        // endShape()
-        // pop();
-
+        // If its a stacked bar chart, translate more at the beginning
         if (this.chartType ==="stacked"){
             translate(-this.barWidth, 0)
         } 
         else {
             translate(-this.barWidth * this.yDataValue.length, 0)
         }
-        
+        // Loop that draws labels and translates each bar by the gap
         for(let i = 0; i < this.data.length; i++){
             
             translate(gap + this.barWidth, 0)

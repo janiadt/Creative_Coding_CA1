@@ -22,6 +22,7 @@ class HorizontalBarChart {
         this.barColor - obj.barColor;
         this.labelPadding = obj.labelPadding;
         this.labelRotation = obj.labelRotation;
+        this.titleSize = obj.titleSize;
         this.barColor = obj.barColor;
         this.chartStrokeWidth = obj.chartStrokeWidth;
 
@@ -80,7 +81,7 @@ class HorizontalBarChart {
         textAlign(CENTER, CENTER);
         fill(this.labelColor);
         strokeWeight(this.chartStrokeWidth);
-        textSize(25);
+        textSize(this.titleSize);
         text(this.chartTitle, this.chartWidth/2, -this.chartHeight * 1.15);
         pop();
     
@@ -97,7 +98,7 @@ class HorizontalBarChart {
             textStyle(ITALIC); //Make this a variable
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
-            text((round(maxValue / this.numTicks)) * i, 10, 10); //this -70 needs to be the padding
+            text((round(maxValue / this.numTicks)) * i, this.labelPadding, 10); 
             pop();
             line(0,0,0,-10);
             // Scales with chart width now instead of height
@@ -116,16 +117,29 @@ class HorizontalBarChart {
         textSize(this.yDataDescriptionSize);
         text(this.data[0][this.yDataDescription], this.chartWidth/2, this.chartHeight/ 4);
         pop();
-        
 
-        // Line graph code  
-        // push();
-        // beginShape()
-        // for(let i = 0; i < this.data.length; i++){  
-        //     vertex((this.barWidth+gap)*i, -this.data[i][this.yDataValue] * scalar);
-        // }
-        // endShape()
-        // pop();
+        // Rendering the legend by iterating through our y values
+        push();
+        translate(this.chartWidth + 60,-this.chartHeight/1.2);
+        for(let i = 0; i < this.yDataValue.length; i++){
+            push();
+            noStroke();
+            textSize(this.fontSize);
+            textAlign(LEFT, CENTER);
+            fill(this.labelColor);
+            strokeWeight(this.chartStrokeWidth);
+            textSize(this.labelTextSize);
+            text(this.yDataValue[i], 0, 0);
+            pop();
+            push();
+            fill(this.barColor[i]);
+            translate(-15,-7);
+            rect(0,0,10,10);
+            pop();
+            translate(0,20);
+        }
+        pop();
+        
         
         if (this.chartType ==="stacked"){
             translate(0, -this.chartHeight);
@@ -140,21 +154,20 @@ class HorizontalBarChart {
             translate(0, gap + this.barWidth)
 
             // X data values and labels
-            push();  
+            push();
             noStroke();
             textSize(this.fontSize);
-            rotate(0);
-            textAlign(CENTER, CENTER);
+            textAlign(RIGHT, CENTER);
             fill(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
             textSize(this.labelTextSize);
             // If it's a stacked bar chart, get the half of the bar
             if (this.chartType !== "stacked"){
-                translate(-75,this.barWidth); //get variables for this
+                translate(-this.labelPadding,this.barWidth); 
             } else {
-                translate(-75,this.barWidth/2); //get variables for this
+                translate(-this.labelPadding,this.barWidth/2); 
             }
-            text(this.data[i][this.xDataValue], this.labelPadding, 0);
+            text(this.data[i][this.xDataValue], 0, 0);
             pop();         
             pop();
 

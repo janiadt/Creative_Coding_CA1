@@ -17,6 +17,12 @@ function setup(){
   createCanvas(canvasWidth, canvasHeight);
   background(200);
   angleMode(DEGREES);
+  // Data title
+  push();
+  translate(canvasWidth/2, 10);
+  text("Data set title goes here",0 ,0);
+  pop();
+
   numBars = data.rows.length;
   // Cleaning up data
   for(let i = 0; i < numBars; i++){
@@ -48,6 +54,7 @@ function setup(){
     barColor: "#bf394b",
     labelPadding: 10,
     labelRotation: 45,
+    titleSize: 20,
     barColor: ["#db701f", "#7b42f5"],
     chartStrokeWidth:0.8
 }
@@ -75,6 +82,7 @@ let barChart02 = {
   barColor: "#bf394b",
   labelPadding: 10,
   labelRotation: 45,
+  titleSize: 20,
   barColor: ["#db701f", "#7b42f5"],
   chartStrokeWidth:0.8
 }
@@ -89,7 +97,7 @@ let barChart03 = {
   yDataDescription: "Statistic",
   yDataDescriptionSize: 20,
   xDataValue: "Age Group",
-  xPos: -800,
+  xPos: -880,
   yPos: 480,
   chartWidth: 300,
   chartHeight: 300,
@@ -100,8 +108,9 @@ let barChart03 = {
   numTicks: 10,
   axisLineWeight: 1,
   barColor: "#bf394b",
-  labelPadding: 10,
+  labelPadding: 5,
   labelRotation: 45,
+  titleSize: 20,
   barColor: ["#db701f", "#7b42f5"],
   chartStrokeWidth:0.8
 }
@@ -127,8 +136,9 @@ let barChart04 = {
   numTicks: 10,
   axisLineWeight: 1,
   barColor: "#bf394b",
-  labelPadding: 10,
+  labelPadding: 5,
   labelRotation: 45,
+  titleSize: 20,
   barColor: ["#db701f", "#7b42f5"],
   chartStrokeWidth:0.8
 }
