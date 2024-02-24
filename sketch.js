@@ -51,7 +51,6 @@ function setup(){
     barWidth: 15,
     numTicks: 10,
     axisLineWeight: 1,
-    barColor: "#bf394b",
     labelPadding: 10,
     labelRotation: 45,
     titleSize: 20,
@@ -79,7 +78,6 @@ let barChart02 = {
   barWidth: 30,
   numTicks: 10,
   axisLineWeight: 1,
-  barColor: "#bf394b",
   labelPadding: 10,
   labelRotation: 45,
   titleSize: 20,
@@ -107,7 +105,6 @@ let barChart03 = {
   barWidth: 30,
   numTicks: 10,
   axisLineWeight: 1,
-  barColor: "#bf394b",
   labelPadding: 5,
   labelRotation: 45,
   titleSize: 20,
@@ -135,7 +132,6 @@ let barChart04 = {
   barWidth: 15,
   numTicks: 10,
   axisLineWeight: 1,
-  barColor: "#bf394b",
   labelPadding: 5,
   labelRotation: 45,
   titleSize: 20,
@@ -143,11 +139,40 @@ let barChart04 = {
   chartStrokeWidth:0.8
 }
 
+let pieChart01 = {
+  chartTitle: "Median Annual Earning in Ireland",
+  chartType: "clustered",
+  data: cleanData,
+  fullLength: false,
+  // we need to make the y value and array for a stacked bar chart.
+  yDataValue: ["Male", "Female"],
+  yDataDescription: "Statistic",
+  yDataDescriptionSize: 20,
+  xDataValue: "Age Group",
+  xPos: 500,
+  yPos: -450,
+  chartWidth: 300,
+  chartHeight: 300,
+  labelTextSize: 15,
+  axisLineColor: "#282b29",
+  labelColor: "#332f2f",
+  pieRadius: 60,
+  numTicks: 10,
+  axisLineWeight: 1,
+  labelPadding: 5,
+  labelRotation: 45,
+  titleSize: 20,
+  pieSegmentColor: ["#db701f", "#7b42f5"],
+  chartStrokeWidth:0.8
+}
+
+
 // Making our barchart class from the object literal
 barCharts.push(new BarChart(barChart01));
 barCharts.push(new BarChart(barChart02));
 barCharts.push(new HorizontalBarChart(barChart03));
 barCharts.push(new HorizontalBarChart(barChart04));
+barCharts.push(new PieChart(pieChart01));
 
 
 

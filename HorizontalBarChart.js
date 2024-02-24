@@ -19,7 +19,6 @@ class HorizontalBarChart {
         this.barWidth = obj.barWidth;
         this.numTicks = obj.numTicks;
         this.axisLineWeight = obj.axisLineWeight;
-        this.barColor - obj.barColor;
         this.labelPadding = obj.labelPadding;
         this.labelRotation = obj.labelRotation;
         this.titleSize = obj.titleSize;
@@ -105,15 +104,16 @@ class HorizontalBarChart {
         }
         pop();
 
-        // Y value label
+        // Y value description
         push();
         noStroke();
+        translate(this.chartWidth/2,this.yDataDescriptionSize + 40);
         textSize(this.fontSize);
         textAlign(CENTER, CENTER);
         fill(this.labelColor);
         strokeWeight(this.chartStrokeWidth);
         textSize(this.yDataDescriptionSize);
-        text(this.data[0][this.yDataDescription], this.chartWidth/2, this.chartHeight/ 4);
+        text(this.data[0][this.yDataDescription], 0, 0);
         pop();
 
         // Rendering the legend by iterating through our y values
@@ -171,7 +171,7 @@ class HorizontalBarChart {
 
             // Drawing the bars
             push();
-            //Nested loop for each y data value
+            //Nested loop for each y data value that draws the bars
             for(let j = 0; j < this.yDataValue.length; j++){
 
                 

@@ -1,4 +1,4 @@
-class BarChart {
+class PieChart {
     // The constructor gets our chart object and assigns its values based on the object.
     constructor(obj){
         this.chartTitle = obj.chartTitle;
@@ -16,13 +16,12 @@ class BarChart {
         this.labelTextSize = obj.labelTextSize;
         this.axisLineColor = obj.axisLineColor;
         this.labelColor = obj.labelColor;
-        this.barWidth = obj.barWidth;
-        this.numTicks = obj.numTicks;
+        this.pieRadius = obj.pieRadius;
         this.axisLineWeight = obj.axisLineWeight;
         this.labelPadding = obj.labelPadding;
         this.labelRotation = obj.labelRotation;
         this.titleSize = obj.titleSize;
-        this.barColor = obj.barColor;
+        this.pieSegmentColor = obj.pieSegmentColor;
         this.chartStrokeWidth = obj.chartStrokeWidth;
 
     }
@@ -34,33 +33,16 @@ class BarChart {
         // Warning Errors
         if (this.chartType === "clustered" && this.fullLength === true){
             console.log("A 100% bar chart can not be made with a clustered or single type bar chart: " + this.chartTitle);
-            
         }
         
       
-        let gap = (this.chartWidth - (this.data.length * this.barWidth)) / (this.data.length + 1);
+        let gap = (this.chartWidth - (this.data.length * this.pieRadius)) / (this.data.length + 1);
         
-        let maxValue;
         let maxValues = [];
 
         for (let i = 0; i < this.yDataValue.length; i++){
             maxValues.push(max(this.data.map((row) => +row[this.yDataValue[i]]))); 
         }
-
-        if (this.chartType ==="stacked"){
-            // The for loop adds all y value components for the purposes of a stacked bar chart
-            let sum = 0;
-            for(let i = 0; i < this.yDataValue.length; i++) {
-                sum += maxValues[i];
-            }
-            maxValue = sum;
-        } 
-        else {
-            maxValue = max(maxValues);
-        }
-        
-        // Value to be used to scale the bars
-        let scalar = this.chartHeight / maxValue;
 
         // Rendering the chart lines
         
@@ -70,6 +52,7 @@ class BarChart {
         line(0, 0, this.chartWidth, 0);
         line(0,0,0,-this.chartHeight);
 
+        this.chartWidth = this.pieRadius * this.data.length;
         // Rendering the title
         push();
         noStroke();
@@ -82,30 +65,11 @@ class BarChart {
         pop();
     
         
-        // all labels and ticks for Y value
-        push();
-        for(let i = 0; i < this.numTicks + 1; i++){
-            push();
-            translate(-50 -this.labelPadding,0);
-            noStroke();
-            textSize(this.fontSize);
-            textAlign(LEFT, CENTER);
-            fill(this.labelColor);
-            strokeWeight(this.chartStrokeWidth);
-            textStyle(ITALIC); //Make this a variable
-            textSize(this.labelTextSize);
-            translate(0, this.barWidth / this.numTicks + 1);
-            text((round(maxValue / this.numTicks)) * i, 0, 0);
-            pop();
-            line(0,0,-10,0);
-            translate(0, -this.chartHeight / this.numTicks);
-            
-        }
-        pop();
+        
 
         // Y value description
         push();
-        translate(-80, -this.chartHeight/2);
+        translate(-30, -this.chartHeight/2);
         rotate(-90);
         noStroke();
         textSize(this.fontSize);
@@ -136,27 +100,21 @@ class BarChart {
             text(this.yDataValue[i], 0, 0);
             pop();
             push();
-            fill(this.barColor[i]);
+            fill(this.pieSegmentColor[i]);
             translate(-15,-7);
             rect(0,0,10,10);
             pop();
             translate(0,20);
         }
         pop();
+
         
-      
+ 
         
-        // If its a stacked bar chart, translate more at the beginning
-        if (this.chartType ==="stacked"){
-            translate(-this.barWidth, 0)
-        } 
-        else {
-            translate(-this.barWidth * this.yDataValue.length, 0)
-        }
-        // Loop that draws labels and translates each bar by the gap
+        // Translating each pie chart by its width
         for(let i = 0; i < this.data.length; i++){
             
-            translate(gap + this.barWidth, 0)
+            translate(this.pieRadius, 0);
 
             push();
             rotate(45);
@@ -166,54 +124,45 @@ class BarChart {
             fill(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
             textSize(this.labelTextSize);
-            translate(10, this.barWidth / 4);
+            translate(10, this.pieRadius / 4);
             text(this.data[i][this.xDataValue], this.labelPadding, 0);
             pop();
             
             pop();
             push();
+            translate(0, -this.chartHeight/2);
             //Nested loop for each y data value that draws the bars
             for(let j = 0; j < this.yDataValue.length; j++){
-
-                // Calculating the max value for each bar for the purposes of the 100% bar chart
-                let barMaxValues = [];
-                let barMaxValue = 0;
+                // Calculating the max value for each bar for the purposes of pie chart, because we need to divide our current data with the max data for each i category
+                let dataMaxValues = [];
+                let dataMaxValue = 0;
                 for(let m = 0; m < this.yDataValue.length; m++){
-                    barMaxValues.push(+this.data[i][this.yDataValue[m]]);
+                    dataMaxValues.push(+this.data[i][this.yDataValue[m]]);
                 }
 
                 let sum = 0;
                 for(let m = 0; m < this.yDataValue.length; m++){
                     
-                    sum += barMaxValues[m];
+                    sum += dataMaxValues[m];
                 }
 
-                barMaxValue = sum;
+                dataMaxValue = sum;
 
-                // If it's a full 100% length bar chart, do the adjusted barHeight calculation. If not, just do the normal one
-                let barHeight = 0;
-                if (this.fullLength === true){
-                    barHeight = (this.data[i][this.yDataValue[j]] / barMaxValue) * this.chartHeight;  
-                } else {
-                    barHeight = this.data[i][this.yDataValue[j]] * scalar;
-                }
-
+               
+                // To make a pie chart, we need to figure out the percentage in decimal of each data value j divided by the max value
+                let piePercentage = (this.data[i][this.yDataValue[j]] / dataMaxValue);
+                // The angle then of each y value is this percentage decimal * 360
+                let dataAngle = piePercentage * 360;
                 // End calculation
-                
-                fill(this.barColor[j]);
-                // Drawing a rectangle with the barheight and width, and then translating to the bar height and drawing another one.
-                // If the chart type is stacked, put the bar on the other bar
-                if (this.chartType === "stacked"){
-                    rect(0, 0, this.barWidth, -barHeight);
-                    translate(0,-barHeight);
-                    
-                }
-                // If the chart type is clustered, put the bar next to the other bar
-                else {
-                    rect(0, 0, this.barWidth, -barHeight);
-                    translate(this.barWidth, 0);
-                    
-                }
+
+                fill(this.pieSegmentColor[j]);
+                let lastAngle = 0;
+                arc(
+                    0,0,this.pieRadius,this.pieRadius,lastAngle,lastAngle + dataAngle, PIE
+                );
+                // Rotating the next arc by the angle (this is basically the pie chart equivalent of translating upward by the bar height)
+                rotate(dataAngle);
+                lastAngle += dataAngle;
                 
             }
             pop();
