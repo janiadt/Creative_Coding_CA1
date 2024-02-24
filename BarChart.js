@@ -87,7 +87,7 @@ class BarChart {
         push();
         for(let i = 0; i < this.numTicks + 1; i++){
             push();
-            translate(-70,0);
+            translate(-50 + -this.labelPadding,0);
             noStroke();
             textSize(this.fontSize);
             textAlign(LEFT, CENTER);
@@ -106,6 +106,7 @@ class BarChart {
 
         // Y value label
         push();
+        translate(-this.chartWidth/3, -this.chartHeight/2);
         rotate(-90);
         noStroke();
         textSize(this.fontSize);
@@ -113,7 +114,7 @@ class BarChart {
         fill(this.labelColor);
         strokeWeight(this.chartStrokeWidth);
         textSize(this.yDataDescriptionSize);
-        text(this.data[0][this.yDataDescription], this.chartHeight/2, -this.chartWidth / 3);
+        text(this.data[0][this.yDataDescription],0,0);
         pop();
 
         // Rendering the legend by iterating through our y values
@@ -145,7 +146,7 @@ class BarChart {
         pop();
         
       
-
+        
         // If its a stacked bar chart, translate more at the beginning
         if (this.chartType ==="stacked"){
             translate(-this.barWidth, 0)
@@ -219,6 +220,7 @@ class BarChart {
             pop();
                 
         } 
-         
+    
     }
+    
 }

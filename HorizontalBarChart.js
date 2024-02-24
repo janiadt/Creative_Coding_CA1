@@ -39,8 +39,6 @@ class HorizontalBarChart {
             console.log("A 100% bar chart can not be made with a clustered or single type bar chart: " + this.chartTitle);
             
         }
-        
-      
       
         let gap = (this.chartHeight - (this.data.length * this.barWidth)) / (this.data.length + 1);
         
