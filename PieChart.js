@@ -29,19 +29,11 @@ class PieChart {
     render(){
         noFill();
         strokeWeight(this.axisLineWeight);
-
-        // Warning Errors
-        if (this.chartType === "clustered" && this.fullLength === true){
-            console.log("A 100% bar chart can not be made with a clustered or single type bar chart: " + this.chartTitle);
-        }
-        
-      
-        let gap = (this.chartWidth - (this.data.length * this.pieRadius)) / (this.data.length + 1);
         
         let maxValues = [];
 
         for (let i = 0; i < this.yDataValue.length; i++){
-            maxValues.push(max(this.data.map((row) => +row[this.yDataValue[i]]))); 
+            maxValues.push(max(this.data.map((row) => +row[this.yDataValue[i]])));        
         }
 
         // Rendering the chart lines
@@ -142,12 +134,11 @@ class PieChart {
 
                 let sum = 0;
                 for(let m = 0; m < this.yDataValue.length; m++){
-                    
                     sum += dataMaxValues[m];
                 }
 
                 dataMaxValue = sum;
-
+             
                
                 // To make a pie chart, we need to figure out the percentage in decimal of each data value j divided by the max value
                 let piePercentage = (this.data[i][this.yDataValue[j]] / dataMaxValue);

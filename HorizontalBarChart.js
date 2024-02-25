@@ -88,6 +88,7 @@ class HorizontalBarChart {
         for(let i = 0; i < this.numTicks + 1; i++){
             push();
             noStroke();
+            translate(0,this.labelPadding);
             rotate(45);
             textSize(this.fontSize);
             fill(this.labelColor);
@@ -95,7 +96,12 @@ class HorizontalBarChart {
             textStyle(ITALIC); //Make this a variable
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
-            text((round(maxValue / this.numTicks)) * i, this.labelPadding, 10); 
+            if(this.fullLength){
+                text((round(100 / this.numTicks)) * i, 0, 0);
+            }
+            else{
+                text((round(maxValue / this.numTicks)) * i, 0, 0);
+            }
             pop();
             line(0,0,0,-10);
             // Scales with chart width now instead of height

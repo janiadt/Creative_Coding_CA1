@@ -95,7 +95,13 @@ class BarChart {
             textStyle(ITALIC); //Make this a variable
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
-            text((round(maxValue / this.numTicks)) * i, 0, 0);
+            if(this.fullLength){
+                text((round(100 / this.numTicks)) * i, 0, 0);
+            }
+            else{
+                text((round(maxValue / this.numTicks)) * i, 0, 0);
+            }
+            
             pop();
             line(0,0,-10,0);
             translate(0, -this.chartHeight / this.numTicks);
@@ -153,7 +159,7 @@ class BarChart {
         else {
             translate(-this.barWidth * this.yDataValue.length, 0)
         }
-        // Loop that draws labels and translates each bar by the gap
+        // Loop that draws x value labels and translates each bar by the gap
         for(let i = 0; i < this.data.length; i++){
             
             translate(gap + this.barWidth, 0)
