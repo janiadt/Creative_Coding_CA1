@@ -17,6 +17,7 @@ function setup(){
   createCanvas(canvasWidth, canvasHeight);
   background(200);
   angleMode(DEGREES);
+  
   // Data title
   push();
   translate(canvasWidth/2, 10);
@@ -151,18 +152,18 @@ let pieChart01 = {
   xDataValue: "Age Group",
   xPos: 500,
   yPos: -450,
-  chartWidth: 300,
+  chartWidth: 400,
   chartHeight: 300,
   labelTextSize: 15,
   axisLineColor: "#282b29",
   labelColor: "#332f2f",
-  pieRadius: 60,
+  pieRadius: 150,
   numTicks: 10,
   axisLineWeight: 1,
   labelPadding: 5,
   labelRotation: 45,
   titleSize: 20,
-  pieSegmentColor: ["#db701f", "#7b42f5"],
+  pieSegmentColor: ["#db701f", "#7b42f5", "#eb7134", "#eb9f34", "#3486eb", "#2a1b4a"],
   chartStrokeWidth:0.8
 }
 
@@ -179,5 +180,6 @@ barCharts.push(new PieChart(pieChart01));
 }
 // calling the class' render function for each barchart in our barchart array
 function draw(){
+  noLoop();
   barCharts.forEach(bar => bar.render());
 }
