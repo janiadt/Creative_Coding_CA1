@@ -154,7 +154,7 @@ class BarChart {
         
       
         
-        // If its a stacked bar chart, translate more at the beginning
+        // If its a clustered bar chart, translate more at the beginning
         if (this.chartType ==="stacked"){
             translate(-this.barWidth, 0)
         } 

@@ -63,7 +63,7 @@ class PieChart {
         fill(this.labelColor);
         strokeWeight(this.chartStrokeWidth);
         textSize(this.titleSize);
-        text(this.chartTitle, this.chartHeight/2, -this.chartHeight * 1.15);
+        text(this.chartTitle, this.chartWidth/2, -this.chartHeight * 1.15);
         pop();
     
         

@@ -97,7 +97,7 @@ let barChart02 = {
 }
 
 let barChart03 = {
-  chartTitle: "Median Annual Earning in Ireland",
+  chartTitle: "Median Annual Earning in Ireland By Gender",
   chartType: "stacked",
   data: cleanData1,
   fullLength: true,
@@ -125,7 +125,7 @@ let barChart03 = {
 }
 
 let barChart04 = {
-  chartTitle: "Median Annual Earning in Ireland",
+  chartTitle: "Median Annual Earning in Ireland By Gender",
   chartType: "clustered",
   data: cleanData1,
   fullLength: false,
@@ -153,7 +153,7 @@ let barChart04 = {
 }
 
 let pieChart01 = {
-  chartTitle: "Median Annual Earning in Ireland",
+  chartTitle: "Distribution of Median Annual Earning by Age and Gender",
   chartType: "clustered",
   data: cleanData1,
   // we need to make the y value and array for a stacked bar chart.
