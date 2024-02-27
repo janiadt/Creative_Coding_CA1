@@ -151,7 +151,6 @@ class HorizontalBarChart {
         
         if (this.chartType ==="stacked"){
             translate(0, -this.chartHeight);
-            translate(0, -(this.barWidth ));
         } 
         else {
             translate(0, -(this.chartHeight + this.barWidth))
