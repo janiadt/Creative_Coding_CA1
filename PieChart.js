@@ -1,30 +1,38 @@
 class PieChart {
     // The constructor gets our chart object and assigns its values based on the object.
     constructor(obj){
+        // Chart properties
         this.chartTitle = obj.chartTitle;
         this.chartType = obj.chartType;
+        // Data
         this.data = obj.data;
-        this.fullLength = obj.fullLength;
         this.yDataValue = obj.yDataValue;
+        // Y Data description 
         this.yDataDescription = obj.yDataDescription
         this.yDataDescriptionSize = obj.yDataDescriptionSize
         this.xDataValue = obj.xDataValue;
+        // Chart position
         this.xPos = obj.xPos;
         this.yPos = obj.yPos;
+        // Chart width and height
         this.chartWidth = obj.chartWidth;
         this.chartHeight = obj.chartHeight;
+        // Chart styling
         this.labelTextSize = obj.labelTextSize;
         this.axisLineColor = obj.axisLineColor;
         this.labelColor = obj.labelColor;
-        this.pieRadius = obj.pieRadius;
         this.axisLineWeight = obj.axisLineWeight;
         this.labelPadding = obj.labelPadding;
         this.labelRotation = obj.labelRotation;
         this.titleSize = obj.titleSize;
         this.pieSegmentColor = obj.pieSegmentColor;
         this.chartStrokeWidth = obj.chartStrokeWidth;
+        this.legendPadding = obj.legendPadding;
+        // Radius of each pie chart
+        this.pieRadius = obj.pieRadius;
 
     }
+
 
     render(){
         noFill();
@@ -76,11 +84,7 @@ class PieChart {
 
         // Rendering the legend by iterating through our x values
         push();
-        if (this.fullLength === true){
-            translate(this.chartWidth + 40,-this.chartHeight/1.2);  
-        } else {
-            translate(this.chartWidth,-this.chartHeight/1.2);
-        }
+        translate(this.chartWidth + this.legendPadding,-this.chartHeight/1.2);  
 
         
         for(let i = 0; i < this.data.length; i++){
@@ -131,7 +135,6 @@ class PieChart {
             let dataCombinedValue = 0;
             for(let m = 0; m < this.data.length; m++){
                 dataCombinedValues.push(+this.data[m][this.yDataValue[i]]);
-                console.log(dataCombinedValues);
             }
             
             let sum = 0;
@@ -143,9 +146,6 @@ class PieChart {
             dataCombinedValue = sum;
             //Nested loop for each y data value that draws the bars
             for(let j = 0; j < this.data.length; j++){
-                
-                
-                
                
                 // To make a pie chart, we need to figure out the percentage in decimal of each data value j divided by the max value
                 let piePercentage = (+this.data[j][this.yDataValue[i]] / dataCombinedValue);
@@ -160,7 +160,6 @@ class PieChart {
                 );
                 // Rotating the next arc by the angle (this is basically the pie chart equivalent of translating upward by the bar height)
                 rotate(dataAngle);
-                console.log(piePercentage);
                 lastAngle += dataAngle;
                 
             }

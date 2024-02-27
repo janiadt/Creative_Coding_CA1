@@ -1,41 +1,47 @@
 // Data arrays instantiated
 
-let data = [];
-let cleanData = [];
+// Setting up two different data set slots
+let data1 = [];
+let cleanData1 = [];
+let data2 = [];
+let cleanData2 = [];
 let barCharts = [];
-let numBars;
+let numBarsSlot1;
+let numBarsSlot2;
 
 const canvasWidth = 1800;
 const canvasHeight = 1000;
 
 // Loading our data into our data array
 function preload(){
-  data = loadTable("data/DEA.csv", "csv", "header");
+  data1 = loadTable("data/DEA.csv", "csv", "header");
+  data2 = loadTable("data/WBD.csv", "csv", "header");
+}
+
+function cleanData(cleanArray, rawData, dataNumBars){
+  for(let i = 0; i < dataNumBars; i++){
+    cleanArray.push(rawData.rows[i].obj);
+  }
 }
 
 function setup(){
   createCanvas(canvasWidth, canvasHeight);
   background(200);
   angleMode(DEGREES);
-  
-  // Data title
-  push();
-  translate(canvasWidth/2, 10);
-  text("Data set title goes here",0 ,0);
-  pop();
 
-  numBars = data.rows.length;
+  numBarsSlot1 = data1.rows.length;
+  numBarsSlot2 = data2.rows.length;
   // Cleaning up data
-  for(let i = 0; i < numBars; i++){
-    cleanData.push(data.rows[i].obj);
-  }
-  console.log(cleanData);
+  cleanData(cleanData1, data1, numBarsSlot1);
+  cleanData(cleanData2, data2, numBarsSlot2);
 
-  // Making our object literal to pass to the barchart class
+  console.log(cleanData1);
+
+  // Making our object literal to pass to the barchart class with all of our desired values
   let barChart01 = {
     chartTitle: "Median Annual Earning in Ireland Clustered",
     chartType: "clustered",
-    data: cleanData,
+    data: cleanData1,
     fullLength: false,
     // we need to make the y value and array for a stacked bar chart.
     yDataValue: ["Male", "Female"],
@@ -56,19 +62,21 @@ function setup(){
     labelRotation: 45,
     titleSize: 20,
     barColor: ["#db701f", "#7b42f5"],
-    chartStrokeWidth:0.8
+    chartStrokeWidth:0.8,
+    legendPadding: 40,
+    tickValuePadding: 60
 }
 
 let barChart02 = {
-  chartTitle: "Median Annual Earning in Ireland Stacked",
+  chartTitle: "Healthy Life Years At 65 in 2022",
   chartType: "stacked",
-  data: cleanData,
-  fullLength: true,
+  data: cleanData2,
+  fullLength: false,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
   yDataDescriptionSize: 20,
-  xDataValue: "Age Group",
+  xDataValue: "Year",
   xPos: 300,
   yPos: 0,
   chartWidth: 300,
@@ -79,17 +87,19 @@ let barChart02 = {
   barWidth: 30,
   numTicks: 10,
   axisLineWeight: 1,
-  labelPadding: 10,
+  labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
   barColor: ["#db701f", "#7b42f5"],
-  chartStrokeWidth:0.8
+  chartStrokeWidth:0.8,
+  legendPadding: 40,
+  tickValuePadding: 35
 }
 
 let barChart03 = {
   chartTitle: "Median Annual Earning in Ireland",
   chartType: "stacked",
-  data: cleanData,
+  data: cleanData1,
   fullLength: true,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
@@ -106,17 +116,18 @@ let barChart03 = {
   barWidth: 30,
   numTicks: 10,
   axisLineWeight: 1,
-  labelPadding: 10,
+  labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
   barColor: ["#db701f", "#7b42f5"],
-  chartStrokeWidth:0.8
+  chartStrokeWidth:0.8,
+  legendPadding: 40
 }
 
 let barChart04 = {
   chartTitle: "Median Annual Earning in Ireland",
   chartType: "clustered",
-  data: cleanData,
+  data: cleanData1,
   fullLength: false,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
@@ -125,7 +136,7 @@ let barChart04 = {
   xDataValue: "Age Group",
   xPos: 550,
   yPos: 45,
-  chartWidth: 500,
+  chartWidth: 300,
   chartHeight: 300,
   labelTextSize: 15,
   axisLineColor: "#282b29",
@@ -133,18 +144,18 @@ let barChart04 = {
   barWidth: 15,
   numTicks: 10,
   axisLineWeight: 1,
-  labelPadding: 10,
+  labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
   barColor: ["#db701f", "#7b42f5"],
-  chartStrokeWidth:0.8
+  chartStrokeWidth:0.8,
+  legendPadding: 40
 }
 
 let pieChart01 = {
   chartTitle: "Median Annual Earning in Ireland",
   chartType: "clustered",
-  data: cleanData,
-  fullLength: false,
+  data: cleanData1,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
@@ -158,13 +169,42 @@ let pieChart01 = {
   axisLineColor: "#282b29",
   labelColor: "#332f2f",
   pieRadius: 150,
-  numTicks: 10,
   axisLineWeight: 1,
-  labelPadding: 5,
+  labelPadding: 0,
   labelRotation: 45,
   titleSize: 20,
   pieSegmentColor: ["#db701f", "#7b42f5", "#eb7134", "#eb9f34", "#3486eb", "#2a1b4a"],
-  chartStrokeWidth:0.8
+  chartStrokeWidth:0.8,
+  legendPadding: 40
+}
+
+let barChart05 = {
+  chartTitle: "Median Annual Earning in Ireland Stacked",
+  chartType: "stacked",
+  data: cleanData1,
+  fullLength: false,
+  // we need to make the y value and array for a stacked bar chart.
+  yDataValue: ["Male", "Female"],
+  yDataDescription: "Statistic",
+  yDataDescriptionSize: 20,
+  xDataValue: "Age Group",
+  xPos: -200,
+  yPos: 495,
+  chartWidth: 300,
+  chartHeight: 300,
+  labelTextSize: 15,
+  axisLineColor: "#282b29",
+  labelColor: "#332f2f",
+  barWidth: 30,
+  numTicks: 10,
+  axisLineWeight: 1,
+  labelPadding: 15,
+  labelRotation: 45,
+  titleSize: 20,
+  barColor: ["#db701f", "#7b42f5"],
+  chartStrokeWidth:0.8,
+  legendPadding: 40,
+  tickValuePadding: 60
 }
 
 
@@ -174,6 +214,7 @@ barCharts.push(new BarChart(barChart02));
 barCharts.push(new HorizontalBarChart(barChart03));
 barCharts.push(new HorizontalBarChart(barChart04));
 barCharts.push(new PieChart(pieChart01));
+barCharts.push(new BarChart(barChart05));
 
 
 

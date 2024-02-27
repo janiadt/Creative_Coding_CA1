@@ -1,6 +1,7 @@
 class HorizontalBarChart {
     // The constructor gets our chart object and assigns its values based on the object.
     constructor(obj){
+        // Chart title and data
         this.chartTitle = obj.chartTitle;
         this.chartType = obj.chartType;
         this.data = obj.data;
@@ -9,10 +10,12 @@ class HorizontalBarChart {
         this.yDataDescription = obj.yDataDescription
         this.yDataDescriptionSize = obj.yDataDescriptionSize
         this.xDataValue = obj.xDataValue;
+        // Chart position and width and height
         this.xPos = obj.xPos;
         this.yPos = obj.yPos;
         this.chartWidth = obj.chartWidth;
         this.chartHeight = obj.chartHeight;
+        // Chart styling
         this.labelTextSize = obj.labelTextSize;
         this.axisLineColor = obj.axisLineColor;
         this.labelColor = obj.labelColor;
@@ -24,6 +27,8 @@ class HorizontalBarChart {
         this.titleSize = obj.titleSize;
         this.barColor = obj.barColor;
         this.chartStrokeWidth = obj.chartStrokeWidth;
+        this.legendPadding = obj.legendPadding;
+        this.tickValuePadding = obj.tickValuePadding;
 
     }
 
@@ -36,7 +41,6 @@ class HorizontalBarChart {
         // Warning Errors
         if (this.chartType === "clustered" && this.fullLength === true){
             console.log("A 100% bar chart can not be made with a clustered or single type bar chart: " + this.chartTitle);
-            
         }
       
         let gap = (this.chartHeight - (this.data.length * this.barWidth)) / (this.data.length + 1);
@@ -62,7 +66,7 @@ class HorizontalBarChart {
         
         
         // Value to be used to scale the bars
-        let scalar = this.chartWidth / maxValue;
+        let scaler = this.chartWidth / maxValue;
 
         // Rendering the chart lines
         translate(this.xPos, this.yPos);
@@ -97,7 +101,7 @@ class HorizontalBarChart {
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
             if(this.fullLength){
-                text((round(100 / this.numTicks)) * i, 0, 0);
+                text(((round(100 / this.numTicks)) * i) + "%", 0, 0);
             }
             else{
                 text((round(maxValue / this.numTicks)) * i, 0, 0);
@@ -124,7 +128,7 @@ class HorizontalBarChart {
 
         // Rendering the legend by iterating through our y values
         push();
-        translate(this.chartWidth + 60,-this.chartHeight/1.2);
+        translate(this.chartWidth + this.legendPadding,-this.chartHeight/1.2);
         for(let i = 0; i < this.yDataValue.length; i++){
             push();
             noStroke();
@@ -201,7 +205,7 @@ class HorizontalBarChart {
                 if (this.fullLength === true){
                     barHeight = (this.data[i][this.yDataValue[j]] / barMaxValue) * this.chartHeight;  
                 } else {
-                    barHeight = this.data[i][this.yDataValue[j]] * scalar;
+                    barHeight = this.data[i][this.yDataValue[j]] * scaler;
                 }
 
                 // End calculation
