@@ -48,9 +48,9 @@ class BarChart {
         let maxValue;
         let maxValues = [];
 
+        // Pushing the max values by mapping each value from the y data values to a new array for each y data set. We then get the max of it with the max function.
         for (let i = 0; i < this.yDataValue.length; i++){
             maxValues.push(max(this.data.map((row) => +row[this.yDataValue[i]]))); 
-            console.log(maxValues);
         }
 
         if (this.chartType === "stacked"){
@@ -60,7 +60,6 @@ class BarChart {
                 sum += maxValues[i];
             }
             maxValue = sum;
-            console.log(maxValue);
         } 
         else {
             maxValue = max(maxValues);
@@ -68,7 +67,6 @@ class BarChart {
         
         // Value to be used to scale the bars
         let scaler = this.chartHeight / maxValue;
-        console.log(scaler);
 
         // Rendering the chart lines
         
@@ -198,7 +196,7 @@ class BarChart {
                 }
 
                 barMaxValue = sum;
-                console.log(barMaxValue);
+            
                 // If it's a full 100% length bar chart, do the adjusted barHeight calculation. If not, just do the normal one
                 let barHeight = 0;
                 if (this.fullLength === true){

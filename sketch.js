@@ -15,7 +15,7 @@ const canvasHeight = 1000;
 // Loading our data into our data array
 function preload(){
   data1 = loadTable("data/DEA.csv", "csv", "header");
-  data2 = loadTable("data/WBD.csv", "csv", "header");
+  data2 = loadTable("data/DEAtrend.csv", "csv", "header");
 }
 
 function cleanData(cleanArray, rawData, dataNumBars){
@@ -68,8 +68,8 @@ function setup(){
 }
 
 let barChart02 = {
-  chartTitle: "Healthy Life Years At 65 in 2022",
-  chartType: "stacked",
+  chartTitle: "Trend of Average Annual Pay Sorted By Gender (2011-2022)",
+  chartType: "clustered",
   data: cleanData2,
   fullLength: false,
   // we need to make the y value and array for a stacked bar chart.
@@ -84,7 +84,7 @@ let barChart02 = {
   labelTextSize: 15,
   axisLineColor: "#282b29",
   labelColor: "#332f2f",
-  barWidth: 30,
+  barWidth: 8,
   numTicks: 10,
   axisLineWeight: 1,
   labelPadding: 15,
@@ -93,7 +93,7 @@ let barChart02 = {
   barColor: ["#db701f", "#7b42f5"],
   chartStrokeWidth:0.8,
   legendPadding: 40,
-  tickValuePadding: 35
+  tickValuePadding: 60
 }
 
 let barChart03 = {
