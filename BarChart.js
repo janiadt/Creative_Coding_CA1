@@ -98,7 +98,7 @@ class BarChart {
             textAlign(LEFT, CENTER);
             fill(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
-            textStyle(ITALIC); //Make this a variable
+            textStyle(ITALIC);
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
 
@@ -196,6 +196,7 @@ class BarChart {
                 }
 
                 barMaxValue = sum;
+                
             
                 // If it's a full 100% length bar chart, do the adjusted barHeight calculation. If not, just do the normal one
                 let barHeight = 0;

@@ -113,7 +113,7 @@ class PieChart {
         // Translating each pie chart by its width
         for(let i = 0; i < this.yDataValue.length; i++){
             
-            translate(gap + (this.pieRadius * 1.7   ), 0);
+            translate(gap + (this.pieRadius * 1.7), 0);
 
             push();
             rotate(45);

@@ -97,7 +97,7 @@ class HorizontalBarChart {
             textSize(this.fontSize);
             fill(this.labelColor);
             strokeWeight(this.chartStrokeWidth);
-            textStyle(ITALIC); //Make this a variable
+            textStyle(ITALIC);
             textSize(this.labelTextSize);
             translate(0, this.barWidth / this.numTicks + 1);
             if(this.fullLength){
