@@ -46,7 +46,7 @@ function setup(){
     // we need to make the y value and array for a stacked bar chart.
     yDataValue: ["Male", "Female"],
     yDataDescription: "Statistic",
-    yDataDescriptionSize: 20,
+    yDataDescriptionSize: 15,
     xDataValue: "Age Group",
     xPos: 130,
     yPos: 400,
@@ -68,14 +68,14 @@ function setup(){
 }
 
 let barChart02 = {
-  chartTitle: "Trend of Average Annual Pay Sorted By Gender (2011-2022)",
+  chartTitle: "Trend of Average Annual Pay Sorted By Gender",
   chartType: "clustered",
   data: cleanData2,
   fullLength: false,
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
-  yDataDescriptionSize: 20,
+  yDataDescriptionSize: 15,
   xDataValue: "Year",
   xPos: 300,
   yPos: 0,
@@ -90,7 +90,7 @@ let barChart02 = {
   labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
-  barColor: ["#FAC748", "#7b42f5"],
+  barColor: ["#db701f", "#7b42f5"],
   chartStrokeWidth:0.8,
   legendPadding: 40,
   tickValuePadding: 60
@@ -104,7 +104,7 @@ let barChart03 = {
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
-  yDataDescriptionSize: 20,
+  yDataDescriptionSize: 15,
   xDataValue: "Age Group",
   xPos: -800,
   yPos: 500,
@@ -132,7 +132,7 @@ let barChart04 = {
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
-  yDataDescriptionSize: 20,
+  yDataDescriptionSize: 15,
   xDataValue: "Age Group",
   xPos: 550,
   yPos: 45,
@@ -147,7 +147,7 @@ let barChart04 = {
   labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
-  barColor: ["#2a1b4a", "#7b42f5"],
+  barColor: ["#db701f", "#7b42f5"],
   chartStrokeWidth:0.8,
   legendPadding: 40
 }
@@ -159,7 +159,7 @@ let pieChart01 = {
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
-  yDataDescriptionSize: 20,
+  yDataDescriptionSize: 15,
   xDataValue: "Age Group",
   xPos: 500,
   yPos: -450,
@@ -186,7 +186,7 @@ let barChart05 = {
   // we need to make the y value and array for a stacked bar chart.
   yDataValue: ["Male", "Female"],
   yDataDescription: "Statistic",
-  yDataDescriptionSize: 20,
+  yDataDescriptionSize: 15,
   xDataValue: "Age Group",
   xPos: -200,
   yPos: 495,
@@ -201,7 +201,7 @@ let barChart05 = {
   labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
-  barColor: ["#3486eb", "#eb9f34"],
+  barColor: ["#db701f", "#7b42f5"],
   chartStrokeWidth:0.8,
   legendPadding: 40,
   tickValuePadding: 60

@@ -57,6 +57,7 @@ class PieChart {
         
         // Rendering the title
         push();
+        textStyle(BOLD);
         noStroke();
         textSize(this.fontSize);
         textAlign(CENTER, CENTER);
@@ -99,7 +100,8 @@ class PieChart {
             text(this.data[i][this.xDataValue], 0, 0);
             pop();
             push();
-            fill(this.pieSegmentColor[i]);
+            let t = i % this.pieSegmentColor.length;
+            fill(this.pieSegmentColor[t]);
             translate(-15,-7);
             rect(0,0,10,10);
             pop();
@@ -153,7 +155,8 @@ class PieChart {
                 let dataAngle = piePercentage * 360;
                 // End calculation
                
-                fill(this.pieSegmentColor[j]);
+                let t = j % this.pieSegmentColor.length;
+                fill(this.pieSegmentColor[t]);
                 let lastAngle = 0;
                 arc(
                     0,0,this.pieRadius,this.pieRadius,lastAngle,lastAngle + dataAngle, PIE

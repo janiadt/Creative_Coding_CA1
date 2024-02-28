@@ -79,6 +79,7 @@ class BarChart {
         // Rendering the title
         push();
         noStroke();
+        textStyle(BOLD);
         textSize(this.fontSize);
         textAlign(CENTER, CENTER);
         fill(this.labelColor);
