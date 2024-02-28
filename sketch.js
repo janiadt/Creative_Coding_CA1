@@ -90,7 +90,7 @@ let barChart02 = {
   labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
-  barColor: ["#db701f", "#7b42f5"],
+  barColor: ["#FAC748", "#7b42f5"],
   chartStrokeWidth:0.8,
   legendPadding: 40,
   tickValuePadding: 60
@@ -147,7 +147,7 @@ let barChart04 = {
   labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
-  barColor: ["#db701f", "#7b42f5"],
+  barColor: ["#2a1b4a", "#7b42f5"],
   chartStrokeWidth:0.8,
   legendPadding: 40
 }
@@ -201,7 +201,7 @@ let barChart05 = {
   labelPadding: 15,
   labelRotation: 45,
   titleSize: 20,
-  barColor: ["#db701f", "#7b42f5"],
+  barColor: ["#3486eb", "#eb9f34"],
   chartStrokeWidth:0.8,
   legendPadding: 40,
   tickValuePadding: 60
