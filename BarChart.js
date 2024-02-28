@@ -144,7 +144,8 @@ class BarChart {
             text(this.yDataValue[i], 0, 0);
             pop();
             push();
-            fill(this.barColor[i]);
+            let t = i % this.barColor.length;
+            fill(this.barColor[t]);
             translate(-15,-7);
             rect(0,0,10,10);
             pop();
@@ -207,8 +208,8 @@ class BarChart {
                 }
 
                 // End calculation
-                
-                fill(this.barColor[j]);
+                let t = j % this.barColor.length;
+                fill(this.barColor[t]);
                 // Drawing a rectangle with the barheight and width, and then translating to the bar height and drawing another one.
                 // If the chart type is stacked, put the bar on the other bar
                 if (this.chartType === "stacked"){
